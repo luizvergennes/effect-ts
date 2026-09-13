@@ -1,0 +1,34 @@
+// Folder-specific settings
+//
+// For a full list of overridable settings, and general information on folder-specific settings,
+// see the documentation: https://zed.dev/docs/configuring-zed#settings-files
+{
+    "languages": {
+        "TypeScript": {
+            "language_servers": [
+                "typescript-ls",
+                "!vtsls",
+                "!eslint",
+                "!typescript-language-server",
+                "...",
+            ],
+        },
+        "TSX": {
+            "language_servers": [
+                "typescript-ls",
+                "!vtsls",
+                "!eslint",
+                "!typescript-language-server",
+                "...",
+            ],
+        },
+    },
+    "lsp": {
+  		"typescript-ls": {
+  			"binary": {
+  				"arguments": ["--lsp", "--stdio"],
+  				"path": "./node_modules/@effect/tsgo-darwin-arm64/artifacts/typescript/7.0.2/tsc"
+  			}
+  		}
+	}
+}
