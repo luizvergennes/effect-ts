@@ -1,21 +1,15 @@
-import { Context, Effect, Layer } from "effect";
+import { Config, Context, Layer } from "effect";
+import type { Redacted } from "effect/Redacted";
 
-export class Config extends Context.Service<
-	Config,
-	{
-		readonly getConfig: Effect.Effect<{
-			readonly logLevel: string;
-			readonly connection: string;
-		}>;
-	}
->()("Config") {}
+export class Env extends Context.Service<
+	Env,
+	{ port: number; databaseUrl: Redacted<string> }
+>()("Env") {}
 
-export const ConfigLive = Layer.succeed(
-	Config,
-	Config.of({
-		getConfig: Effect.succeed({
-			logLevel: "INFO",
-			connection: "mysql://username:password@hostname:port/database_name",
-		}),
+export const EnvLive = Layer.effect(
+	Env,
+	Config.all({
+		port: Config.Port("PORT").pipe(Config.withDefault(3000)),
+		databaseUrl: Config.Redacted("DATABASE_URL"),
 	}),
 );

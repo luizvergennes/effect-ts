@@ -4,17 +4,18 @@
 	"type": "module",
 	"private": true,
 	"devDependencies": {
+		"@effect/tsgo": "0.45.0",
 		"@types/bun": "latest",
-		"oxlint-tsgolint": "7.0.2001",
 		"oxlint": "1.82.0",
-		"typescript": "7.0.2",
-		"@effect/tsgo": "0.45.0"
+		"oxlint-tsgolint": "7.0.2001",
+		"typescript": "7.0.2"
 	},
 	"peerDependencies": {
 		"typescript": "^7"
 	},
 	"dependencies": {
 		"@effect/platform-bun": "^4.0.0-rc.115",
+		"@effect/sql-pg": "^4.0.0-rc.115",
 		"effect": "^4.0.0-rc.115"
 	},
 	"scripts": {

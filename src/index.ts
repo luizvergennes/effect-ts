@@ -1,11 +1,18 @@
 import { BunRuntime } from "@effect/platform-bun";
-import { Effect } from "effect";
-import { Config, ConfigLive } from "./env";
+import { Effect, Layer } from "effect";
+import { Database, DatabaseLive } from "./database";
+import { Env, EnvLive } from "./env";
 
 const program = Effect.gen(function* () {
-  yield* Effect.log("Hello, World!");
-  const config = yield* Config;
-  yield* Effect.log(config);
+	yield* Effect.log("Hello, World!");
+	const { port, databaseUrl } = yield* Env;
+	yield* Effect.log(port);
+	yield* Effect.log(databaseUrl);
+	const sql = yield* Database;
+	const users = yield* sql`SELECT * FROM users LIMIT 1`;
+	yield* Effect.log(users);
 });
 
-BunRuntime.runMain(Effect.provide(program, ConfigLive));
+const AppConfigLive = DatabaseLive.pipe(Layer.provideMerge(EnvLive));
+
+BunRuntime.runMain(Effect.provide(program, AppConfigLive));
