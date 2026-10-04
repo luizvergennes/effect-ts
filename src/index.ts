@@ -13,7 +13,7 @@ const program = Effect.scoped(
 		yield* Effect.log(port);
 		yield* Effect.log(databaseUrl);
 		const sql = yield* Database;
-		const users = yield* sql`SELECT * FROM users LIMIT 1`;
+		const users = yield* sql`SELECT 1 AS one`;
 		yield* Effect.log(users);
 		yield* Effect.addFinalizer(() =>
 			Console.log("Application is about to exit!"),
